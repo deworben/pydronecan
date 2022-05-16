@@ -18,7 +18,7 @@ exec(open(VERSION_FILE).read())         # Adds __version__ to globals
 
 try:
     if not os.path.exists('dronecan/dsdl_specs'):
-        os.symlink('../../DSDL', 'dronecan/dsdl_specs')
+        os.symlink('/storage/ben/DSDL', 'dronecan/dsdl_specs')
     args = dict(
         name='dronecan',
         version=__version__,
