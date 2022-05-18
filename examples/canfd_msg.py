@@ -13,7 +13,7 @@ parser.add_argument("--node-id", default=100, type=int, help="CAN node ID")
 parser.add_argument("--dna-server", action='store_true', default=False, help="run DNA server")
 parser.add_argument("port", default=None, type=str, help="serial port")
 args = parser.parse_args()
-    
+
 # Initializing a DroneCAN node instance.
 node = dronecan.make_node(args.port, node_id=args.node_id, bitrate=args.bitrate)
 
@@ -37,7 +37,7 @@ def publish_message():
     m.source = "CANFDTestLong"
     m.text = "ThisIsAVeryLongTest.MaryHadALittleLampWhosFleeceWasWhiteAsSnowAndEverywhereThatMaryWentThe"
     node.broadcast(m, canfd=True)
-    
+
 # setup to a LogMessage at 1Hz
 node.periodic(1, publish_message)
 
@@ -46,3 +46,5 @@ try:
     node.spin()
 except KeyboardInterrupt:
     pass
+
+print("done")

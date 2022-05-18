@@ -18,9 +18,12 @@ exec(open(VERSION_FILE).read())         # Adds __version__ to globals
 
 try:
     if not os.path.exists('dronecan/dsdl_specs'):
+        # download from gitlab
         # os.symlink('../../DSDL', 'dronecan/dsdl_specs')
-        os.symlink('/etc/dsdl', 'dronecan/dsdl_specs')
+        os.symlink('./DSDL', 'dronecan/dsdl_specs')
+        # os.symlink('/etc/dsdl', 'dronecan/dsdl_specs')
         # os.symlink('/mnt/c/Users/bdewo/Downloads/DSDL', 'dronecan/dsdl_specs')
+    #     os.symlink(r'C:\Users\bdewo\Downloads\DSDL', 'dronecan/dsdl_specs')
     args = dict(
         name='dronecan',
         version=__version__,
@@ -51,8 +54,15 @@ try:
     )
     # ensure dsdl specs are not empty
     if  len(args['package_data']['dronecan']) == 0:
-        a = [x for x in os.listdir('/etc/dsdl')]
-        raise Exception(f'DSDL {a} specs empty or unavailable, please ensure ../DSDL is present relative to project root')
+        a = [x for x in os.listdir('./DSDL')]
+        b =  [os.path.join(root[len('dronecan/'):], fname)
+                    for root, dirs, files in os.walk('dronecan/dsdl_specs', followlinks=True)
+                    for fname in files if fname.endswith('.uavcan')]
+        c =  [(root, dirs, files) for root, dirs, files in os.walk('dronecan/dsdl_specs', followlinks=True)]
+        # a = [x for x in os.listdir( os.path.join(os.path.dirname(os.path.realpath(__file__)), '..','DSDL'))]
+        d = os.path.exists('./DSDL')
+        e = os.path.exists('dronecan')
+        raise Exception(f'DSDL {a} specs {b} empty {c} or {d} unavailable {e}, please ensure ../DSDL is present relative to project root')
 
     if sys.version_info[0] < 3:
         args['install_requires'] = ['monotonic']

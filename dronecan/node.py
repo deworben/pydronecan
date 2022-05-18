@@ -506,7 +506,7 @@ class Node(Scheduler):
 
         if canfd is None:
             canfd = self._send_canfd
-        
+
         transfer_id = self._next_transfer_id(get_dronecan_data_type(payload).default_dtid)
         transfer = transport.Transfer(payload=payload,
                                       source_node_id=self._node_id,
