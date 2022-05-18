@@ -19,7 +19,7 @@ exec(open(VERSION_FILE).read())         # Adds __version__ to globals
 try:
     if not os.path.exists('dronecan/dsdl_specs'):
         # os.symlink('../../DSDL', 'dronecan/dsdl_specs')
-        os.symlink('/storage/ben/DSDL', 'dronecan/dsdl_specs')
+        os.symlink('/etc/dsdl', 'dronecan/dsdl_specs')
         # os.symlink('/mnt/c/Users/bdewo/Downloads/DSDL', 'dronecan/dsdl_specs')
     args = dict(
         name='dronecan',
@@ -51,7 +51,7 @@ try:
     )
     # ensure dsdl specs are not empty
     if  len(args['package_data']['dronecan']) == 0:
-        a = [x for x in os.listdir('/storage/ben/DSDL')]
+        a = [x for x in os.listdir('/etc/dsdl')]
         raise Exception(f'DSDL {a} specs empty or unavailable, please ensure ../DSDL is present relative to project root')
 
     if sys.version_info[0] < 3:
