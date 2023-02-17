@@ -45,7 +45,7 @@ def io_process(url, bus, target_system, baudrate, tx_queue, rx_queue):
     def connect():
         nonlocal conn, baudrate
         conn = mavutil.mavlink_connection(url, baud=baudrate, source_system=250,
-                                          source_component=mavutil.mavlink.MAV_COMP_ID_MAVCAN,
+                                          source_component=189,
                                           dialect='ardupilotmega')
         if conn is None:
             raise DriverError('unable to connect to %s' % url)
@@ -209,7 +209,7 @@ class MAVCAN(AbstractDriver):
     def is_mavlink_port(device_name, baudrate):
         '''check if a device is sending mavlink'''
         os.environ['MAVLINK20'] = '1'
-        conn = mavutil.mavlink_connection(device_name, baud=baudrate, source_system=250, source_component=mavutil.mavlink.MAV_COMP_ID_MAVCAN)
+        conn = mavutil.mavlink_connection(device_name, baud=baudrate, source_system=250, source_component=189)
         if not conn:
             return False
         m = conn.recv_match(blocking=True, type=['HEARTBEAT','ATTITUDE', 'SYS_STATUS'], timeout=1.1)
