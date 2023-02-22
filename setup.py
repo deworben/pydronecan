@@ -11,10 +11,14 @@
 import os
 import sys
 from setuptools import setup
+from io import open
 
 __version__ = None
 VERSION_FILE = os.path.join(os.path.dirname(__file__), 'dronecan', 'version.py')
 exec(open(VERSION_FILE).read())         # Adds __version__ to globals
+
+with open("README.md", "r", encoding = "utf-8") as fh:
+    long_description = fh.read()
 
 try:
     if not os.path.exists('dronecan/dsdl_specs'):
@@ -28,6 +32,8 @@ try:
         name='dronecan',
         version=__version__,
         description='Python implementation of the DroneCAN protocol stack',
+        long_description = long_description,
+        long_description_content_type = "text/markdown",
         packages=[
             'dronecan',
             'dronecan.dsdl',
