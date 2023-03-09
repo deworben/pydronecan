@@ -1,0 +1,10 @@
+#
+# This message provides high level control over the LED pattern - including waveform/frequency/colour
+# See mavlink/message_definitions/v1.0/swoop.xml for the following definitions:
+#   SWOOP_LED_PATTERN: {SWOOP_LED_COLOR, SWOOP_LED_WAVEFORM, SWOOP_LED_FREQUENCY}
+#
+
+uint32 timestamp
+uint8 colour
+uint8 waveform
+uint8 frequency

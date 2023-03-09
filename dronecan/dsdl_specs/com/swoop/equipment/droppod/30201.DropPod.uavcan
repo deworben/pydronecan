@@ -1,0 +1,8 @@
+uint8 CMD_TYPE_BEGIN_DROPPOD_ROUTINE      = 1
+uint8 command_type
+
+uint3 STATE_INIT = 0
+uint3 STATE_CLOSED = 1
+uint3 STATE_OPEN_LOADING = 2
+uint3 STATE_OPEN_DROPPING = 3
+uint3 state
